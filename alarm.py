@@ -27,3 +27,9 @@ class Alarm():
 		
 	def disableActFlag(self):
 		self.act_flag = False
+	
+	def toJsonFromAlarm(self,alarm):
+		return json
+	
+	def toAlarmfromJson(self,js):
+		return alarm
