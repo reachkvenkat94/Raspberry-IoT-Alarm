@@ -5,6 +5,8 @@ This Class is used to connect to a MQTT broker for publishing and subscription
 @author: Venkat Prasad Krishnamurthy
 '''
 
+import json
+
 
 class Alarm():
 	id = 0
@@ -29,7 +31,16 @@ class Alarm():
 		self.act_flag = False
 	
 	def toJsonFromAlarm(self,alarm):
-		return json
+		data = {}
+		data['id'] = self.id
+		data['sense'] = self.sense_flag
+		data['act'] = self.act_flag
+		self.jsonf = json.dumps(data)
+		return jsonf
 	
 	def toAlarmfromJson(self,js):
+		alarm_dict = json.loads(js)
+		self.id = alarm_dict['id']
+		self.sense_flag = alarm_dict['sense']
+		self.act_flag = alarm_dict['act']
 		return alarm
