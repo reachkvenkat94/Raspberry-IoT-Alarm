@@ -30,7 +30,7 @@ class Alarm():
 	def disableActFlag(self):
 		self.act_flag = False
 	
-	def toJsonFromAlarm(self,alarm):
+	def toJsonFromAlarm(self):
 		data = {}
 		data['id'] = self.id
 		data['sense'] = self.sense_flag

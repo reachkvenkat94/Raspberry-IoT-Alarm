@@ -18,12 +18,20 @@ class MqttSubscriber(Thread):
 		'''
 		Thread.__init__(self);
 		self.enableEmulator = True; # flag to enable emulator function
-		self.topic_sen = "Activate Mat"
+		self.topic_sen = "IoT Mat"
+		self.host = "test.mosquitto.org"
+		self.alarm = Alarm(1,False,False)
+		self.mat = Mat()
 		
 	def run(self):
-		subscribe = MqttClientConnector(self.topic_sen)
-		subscribe.subscribe(host)                  # Connecting to MQTT Broker
-		msg = subscribe.message()                  # Subscribing to specefied Topic
-		print("Json Data Received:\n "+str(msg)+"\n")
-		json = data.toJsonfromSensor(sensor)
-		print('SensorData converted to Json Data again: \n'+str(json))
+		mqt = MqttClientConnector(self.topic_sen)
+		mqt.subscribe(host)                  # Connecting to MQTT Broker
+		msg = mqt.message()                  # Subscribing to specefied Topic
+		self.alarm = self.alarm.toAlarmfromJson(msg)
+		if self.alarm.sense_flag == True:
+			self.mat.checkStatus()
+			if self.alarm.act_flag == True:
+				mqt.publish(self.topic,self.alarm.toJsonFromAlarm(),self.host)
+				self.alarm.act_flag = False
+		
+			
