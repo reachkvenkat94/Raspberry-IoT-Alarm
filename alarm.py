@@ -35,7 +35,7 @@ class Alarm():
 		data['id'] = self.id
 		data['sense'] = self.sense_flag
 		data['act'] = self.act_flag
-		self.jsonf = json.dumps(data)
+		jsonf = json.dumps(data)
 		return jsonf
 	
 	def toAlarmfromJson(self,js):
