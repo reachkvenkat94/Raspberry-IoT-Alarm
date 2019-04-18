@@ -2,6 +2,7 @@
 Created on Apr 16, 2019
 
 @author: Venkat Prasad Krishnamurthy
+@author: Jaydeep Shah
 '''
 from threading import Thread
 import pyowm
